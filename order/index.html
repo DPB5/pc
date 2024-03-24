@@ -24,7 +24,7 @@
                     <div class="inputbox">
                         <input type="email" value="" id="email" required>
                     </div>
-                    <br><br>
+
                     What would like to order?
                     <div class="inputbox">
                         <select id="foodChoice" required>
@@ -44,8 +44,11 @@
                           <option value="sausagePizza">sausage pizza</option>
                         </select>
                       </div>
-                      <br><br>
-                      <center>                    <input type="submit" value="submit" class="btn" id="submit"></center>
+                    Quantity
+                  <div class="inputbox">
+                        <input type="number" value="" id="quantity" required>
+                    </div>
+                      <center>                    <input type="submit" value="submit" class="sub" id="submit"></center>
 
                 </form>
             </div>
@@ -87,9 +90,10 @@ const app = initializeApp(firebaseConfig);
            {
 
              username: document.getElementById("username").value,
-             adress: document.getElementById("adress").value,
+             address: document.getElementById("adress").value,
              PhoneNumber: document.getElementById("phone").value,
              Food: document.getElementById("foodChoice").value,
+             Quantity : document.getElementById("quantity").value,
              email: document.getElementById("email").value
            });
              alert("Order Sucessfull!");
