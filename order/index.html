@@ -54,51 +54,101 @@
             </div>
         </div>
         <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-
-// TODO: Add SDKs for Firebase products that you want to use
-
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-
-// Your web app's Firebase configuration
-
-const firebaseConfig = {
-
-  apiKey: "AIzaSyCW83BUYEbysJMk0OZBgdZHQRTR4grSob0",
-
-  authDomain: "login-dpb.firebaseapp.com",
-
-  projectId: "login-dpb",
-
-  storageBucket: "login-dpb.appspot.com",
-
-  messagingSenderId: "153085198313",
-
-  appId: "1:153085198313:web:908711a41a3bb22ff69578"
-
-};
-const app = initializeApp(firebaseConfig);
-
-//get ref to database services
-          const db = getDatabase(app);
-
-          document.getElementById("submit").addEventListener('click', function(e){
-           e.preventDefault();
-           set(ref(db, 'user/' + document.getElementById("username").value),
-           {
-
-             username: document.getElementById("username").value,
-             address: document.getElementById("adress").value,
-             PhoneNumber: document.getElementById("phone").value,
-             Food: document.getElementById("foodChoice").value,
-             Quantity : document.getElementById("quantity").value,
-             email: document.getElementById("email").value
-           });
-             alert("Order Sucessfull!");
-          })
-
-        </script>
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+        
+        // TODO: Add SDKs for Firebase products that you want to use
+        
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        
+        // Your web app's Firebase configuration
+        
+        const firebaseConfig = {
+        
+          apiKey: "AIzaSyCW83BUYEbysJMk0OZBgdZHQRTR4grSob0",
+        
+          authDomain: "login-dpb.firebaseapp.com",
+        
+          projectId: "login-dpb",
+        
+          storageBucket: "login-dpb.appspot.com",
+        
+          messagingSenderId: "153085198313",
+        
+          appId: "1:153085198313:web:908711a41a3bb22ff69578"
+        
+        };
+        const app = initializeApp(firebaseConfig);
+        
+        //get ref to database services
+                  const db = getDatabase(app);
+        
+        document.getElementById("submit").addEventListener('click', function(e){
+          e.preventDefault();
+        
+          // Gather input field references
+          const usernameInput = document.getElementById("username");
+          const addressInput = document.getElementById("adress");
+          const phoneInput = document.getElementById("phone");
+          const foodChoiceInput = document.getElementById("foodChoice");
+          const quantityInput = document.getElementById("quantity");
+          const emailInput = document.getElementById("email");
+        
+          // Error message variable
+          let errorMessage = "";
+        
+        
+          const usernameValue = usernameInput.value.trim();
+          if (usernameValue === '') {
+            errorMessage += "Please enter your username.\n";
+          }
+        
+          const phoneValue = phoneInput.value.trim();
+          if (phoneValue === '') {
+            errorMessage += "Please enter your phone number.\n";
+          } else if (isNaN(phoneValue) || phoneValue.length < 11) {
+            errorMessage += "Invalid phone number. Please enter a number with at least 11 digits.\n";
+          }
+        
+          // Quantity validation
+          const quantityValue = quantityInput.value.trim();
+          if (quantityValue === '') {
+            errorMessage += "Please enter the quantity.\n";
+          } else if (isNaN(quantityValue)) {
+            errorMessage += "Quantity must be a number.\n";
+          }
+           const emailValue = emailInput.value.trim();
+          if (emailValue === '') {
+            errorMessage += "Please enter your email.\n";
+          }
+           const addressValue = addressInput.value.trim();
+          if (addressValue === '') {
+            errorMessage += "Please enter your address.\n";
+          }
+        
+          if (errorMessage !== "") {
+            alert(errorMessage);
+            return;
+          }
+                  document.getElementById("submit").addEventListener('click', function(e){
+                   e.preventDefault();
+                   set(ref(db, 'user/' + document.getElementById("username").value),
+                   {
+        
+                     username: document.getElementById("username").value,
+                     address: document.getElementById("adress").value,
+                     PhoneNumber: document.getElementById("phone").value,
+                     Food: document.getElementById("foodChoice").value,
+                     Quantity : document.getElementById("quantity").value,
+                     email: document.getElementById("email").value
+                   });
+                     alert("Order Sucessfull!");
+                  })
+        
+          // Valid data, proceed to Firebase operations (replace with your code)
+          // ...
+        });
+                </script>
     </body>
 </html>
