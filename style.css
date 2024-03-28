@@ -133,4 +133,16 @@ h3{
   background-size: cover;
   background-repeat: no-repeat;
 }
-
+.box{
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: white;
+  transition: 0.5s;
+  box-shadow: 15px 15px 15px black;
+  color: black;
+}
+.box:hover{
+	transform: scale(1.3);
+}
